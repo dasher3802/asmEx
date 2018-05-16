@@ -1,0 +1,113 @@
+1. 라즈베리파이 메뉴 -> 프리퍼런스 -> 인터페이스 모두 enable
+
+2. sudo apt-get update
+패키지 리스트 업데이트
+
+3. sudo apt-get upgrade
+버전 업그레이드
+
+4. sudo apt-get install vim -y
+vim 설치
+
+5. sudo apt-get install ibus ibus-hangul
+sudo apt-get install fonts-unfonts-core
+sudo reboot
+한글 설치후 재부팅
+
+6. 한글 입력 설정
+기본설정 -> ibus환경설정 -> 입력 방식 -> 추가 -> 한국어 - Hangul
+기본설정 -> ibus환경설정 -> 일반 -> 다음 입력 방식 <Control>space 로 변경
+마우스로 한글 누른뒤 한영키로 한영바꿀수 있음
+
+7. 라즈베리파이 설정 -> system에서 사용자명, 패스워드 변경후 리부팅
+
+8. 라즈베리파이 설정->	Localisation->	Local-> Language, Country
+				Timezone->Area, Location
+				Keyboard->Layout, Variant
+				WIFI Country-> "not set"
+
+9. 사용안하는 패키지 삭제
+sudo apt-get remove --purge wolfram-engine greenfoot nodered nuscratsh scratsh sonic-pi libreoffice claws-mail claws-mail-i18n minecraft-pi python-pygame
+
+10. 삭제한 패키지에 의존성을 가지는 패키지도 추가삭제
+sudo apt-get autoremove --purge
+
+11. sudo apt-get install samba samba-common-bin
+삼바 설치
+
+12.sudo smbpasswd -a pi
+(비밀번호 동일하게)
+삼바 계정 설정
+
+13. sudo vim /etc/samba/smb.conf
+pi 계정 추가
+
+14. 마지막에 추가
+[pi]
+path = /home/pi
+comment - PI SAMBA SERVER
+valid user = pi
+writable = yes
+browseable = yes
+create mask = 777
+public = yes
+guest ok = no
+
+15. sudo /etc/init.d/samba restart
+삼바 재시작
+
+16. 홈폴더로 가서
+sudo chmod 777 pi
+pi계정 권한 설정
+
+17. ifconfig로 주소확인후 윈도우에서 접근 확인
+
+18. sudo apt-get install git-core
+git-core 설치 wiringPI 설치를 위해 git설치
+
+19. 홈폴더에서
+git clone git://git.drogon.net/wiringPi
+wiring폴더 복사
+
+
+어셈블러 코딩("$", "(gdb)" 는 입력 상태)
+
+실행하기
+$ ./branch01: $?
+
+디버깅 하기
+$ gdb --args ./branch01
+
+디버깅 종료
+(gdb) quit
+
+변수에 값지정
+(gdb) set myvar1 = 6
+
+레지스터에 값지정
+(gdb) p $r0 = 7
+
+현재 디버깅 상태
+(gdb) disas
+(gdb) disas main, +100
+
+모든 레지스터 값 보기
+(gdb) info all-registers
+
+레지스터 값 검색
+(gdb) info registers r0 r1 r2 r3
+
+시작
+(gdb) start
+
+끝까지 진행
+(gdb) continue
+
+한줄 진행
+(gdb) stepi
+
+브래이크 포인트 잡기
+break *0x0001042c
+
+변수 값 보기
+(gdb) p myvar1 
